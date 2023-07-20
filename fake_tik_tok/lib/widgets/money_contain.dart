@@ -1,4 +1,4 @@
-import 'package:fake_tik_tok/constans/texts.dart';
+import 'package:fake_tik_tok/widgets/progress_indicator.dart';
 import 'package:flutter/material.dart';
 
 class MoneyContain extends StatefulWidget {
@@ -8,14 +8,13 @@ class MoneyContain extends StatefulWidget {
       required this.height,
       required this.tikTokMoney,
       required this.money,
-      this.name});
+      required this.name});
 
   final double width;
   final double height;
   final String tikTokMoney;
   final String money;
-  final String? name;
-
+  final String name;
   @override
   State<MoneyContain> createState() => _MoneyContainState();
 }
@@ -37,7 +36,7 @@ class _MoneyContainState extends State<MoneyContain> {
                           onPressed: () {
                             Navigator.pop(context);
                           },
-                          icon: Icon(
+                          icon: const Icon(
                             Icons.close,
                             color: Colors.black,
                             size: 40,
@@ -57,7 +56,7 @@ class _MoneyContainState extends State<MoneyContain> {
                         ),
                       ],
                     ),
-                    Divider(
+                    const Divider(
                         color: Colors.black87,
                         height: 10.0,
                         indent: 5.0, // Starting Space
@@ -65,135 +64,150 @@ class _MoneyContainState extends State<MoneyContain> {
                         )
                   ],
                 ),
-                content: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          'Account',
-                          style: TextStyle(
-                            fontSize: 30,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        Text(
-                          'Name Account',
-                          style: TextStyle(
-                            fontSize: 30,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ],
-                    ),
-                    const Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          '70 Coins',
-                          style: TextStyle(
-                            fontSize: 30,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        Text(
-                          " \$ 0,75",
-                          overflow: TextOverflow.clip,
-                          style: TextStyle(
-                            fontSize: 16,
-                            color: Colors.grey,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    const Row(
-                      children: [
-                        Text(
-                          'Select a payment method',
-                          style: TextStyle(
-                            fontSize: 20,
-                            color: Colors.grey,
-                            fontFamily: 'Tahoma',
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        SizedBox(
-                          height: 50,
-                        ),
-                      ],
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Row(
-                          children: [
-                            Image.asset(
-                              'images/visa.png',
-                              width: 40,
+                content: Container(
+                  height: 280,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          const Text(
+                            'Account',
+                            style: TextStyle(
+                              fontSize: 30,
+                              fontWeight: FontWeight.bold,
                             ),
-                            const Text(
-                              '************7892',
-                              style: TextStyle(
-                                fontSize: 20,
-                                color: Colors.grey,
-                                fontFamily: 'Tahoma',
-                                fontWeight: FontWeight.bold,
+                          ),
+                          Text(
+                            '${widget.name}',
+                            style: const TextStyle(
+                              fontSize: 30,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(
+                        height: 30,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            '${widget.tikTokMoney} coins',
+                            style: const TextStyle(
+                              fontSize: 30,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          Text(
+                            "\$ ${widget.money}",
+                            overflow: TextOverflow.clip,
+                            style: const TextStyle(
+                              fontSize: 16,
+                              color: Colors.grey,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      const Row(
+                        children: [
+                          Text(
+                            'Select a payment method',
+                            style: TextStyle(
+                              fontSize: 20,
+                              color: Colors.grey,
+                              fontFamily: 'Tahoma',
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          SizedBox(
+                            height: 50,
+                          ),
+                        ],
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Row(
+                            children: [
+                              Image.asset(
+                                'images/visa.png',
+                                width: 40,
                               ),
-                            ),
-                          ],
-                        ),
-                        Image.asset(
-                          'images/circle.png',
-                          width: 30,
-                        ),
-                      ],
-                    ),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    const Row(
-                      children: [
-                        Text('Total:   '),
-                        Text(
-                          '\$ 0,75',
-                          style: TextStyle(
-                            fontSize: 20,
-                            color: Colors.black,
-                            fontWeight: FontWeight.bold,
+                              const Text(
+                                '************7892',
+                                style: TextStyle(
+                                  fontSize: 20,
+                                  color: Colors.grey,
+                                  fontFamily: 'Tahoma',
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ],
                           ),
-                        ),
-                      ],
-                    ),
-                  ],
+                          Image.asset(
+                            'images/circle.png',
+                            width: 30,
+                          ),
+                        ],
+                      ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      Row(
+                        children: [
+                          const Text('Total:   '),
+                          Text(
+                            '\$ ${widget.money}',
+                            style: const TextStyle(
+                              fontSize: 20,
+                              color: Colors.black,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
                 actions: [
                   Row(
                     children: [
                       IconButton(
                         onPressed: () {},
-                        icon: Icon(Icons.help_outline),
+                        icon: const Icon(Icons.help_outline),
                       ),
-                      TextButton(
-                        style: TextButton.styleFrom(
-                          foregroundColor: Colors.white,
-                          backgroundColor: Color(0xffff005c),
-                        ),
-                        onPressed: () {
-                          print('Pressed');
-                        },
-                        child: const Padding(
-                          padding: EdgeInsets.symmetric(
-                              horizontal: 350, vertical: 20),
-                          child: Text(
-                            'Pay now',
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
+                      SizedBox(
+                        width: MediaQuery.of(context).size.width / 2,
+                        child: TextButton(
+                          style: TextButton.styleFrom(
+                            foregroundColor: Colors.white,
+                            backgroundColor: const Color(0xffff005c),
+                          ),
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => ProgressInd(
+                                        tiktokmoney: widget.tikTokMoney,
+                                      )),
+                            );
+                          },
+                          child: const Padding(
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 30, vertical: 20),
+                            child: Text(
+                              'Pay now',
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                              ),
                             ),
                           ),
                         ),
@@ -224,26 +238,26 @@ class _MoneyContainState extends State<MoneyContain> {
                   width: 35,
                   height: 35,
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 10,
                 ),
                 Text(
                   "${widget.tikTokMoney}",
                   overflow: TextOverflow.clip,
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 35,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
               ],
             ),
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
             Text(
               " \$ ${widget.money}",
               overflow: TextOverflow.clip,
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 16,
                 color: Colors.grey,
                 fontWeight: FontWeight.bold,

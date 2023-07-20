@@ -14,7 +14,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  var _controller = TextEditingController();
+  final _controller = TextEditingController();
 
   Widget _searchTextField() {
     //add
@@ -97,13 +97,11 @@ class _MyHomePageState extends State<MyHomePage> {
                 const SizedBox(
                   width: 20,
                 ),
-                Container(
-                  child: Image.asset(
-                    'images/send.png',
-                    width: 28,
-                  ),
+                Image.asset(
+                  'images/send.png',
+                  width: 28,
                 ),
-                Container(
+                SizedBox(
                   width: 50,
                   child: SvgPicture.asset(
                     'images/message.svg',
@@ -215,9 +213,9 @@ class _MyHomePageState extends State<MyHomePage> {
                 reverse: false, //default
                 controller: ScrollController(),
                 primary: false,
-                shrinkWrap: true, padding: EdgeInsets.all(5.0),
+                shrinkWrap: true, padding: const EdgeInsets.all(5.0),
 
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 4,
                   mainAxisSpacing: 25.0,
                   crossAxisSpacing: 35.0,
@@ -232,37 +230,45 @@ class _MyHomePageState extends State<MyHomePage> {
                       width: width,
                       height: height,
                       tikTokMoney: '70',
+                      name: _controller.text,
                       money: '0.75'),
                   MoneyContain(
                       width: width,
                       height: height,
                       tikTokMoney: '350',
+                      name: _controller.text,
                       money: '3.75'),
                   MoneyContain(
                       width: width,
                       height: height,
                       tikTokMoney: '700',
+                      name: _controller.text,
                       money: '7.5'),
                   MoneyContain(
                       width: width,
                       height: height,
                       tikTokMoney: '1,400',
+                      name: _controller.text,
                       money: '15'),
                   MoneyContain(
                       width: width,
                       height: height,
                       tikTokMoney: '3,500',
+                      name: _controller.text,
                       money: '37.5'),
                   MoneyContain(
                       width: width,
                       height: height,
                       tikTokMoney: '7,000',
+                      name: _controller.text,
                       money: '75'),
                   MoneyContain(
                       width: width,
                       height: height,
                       tikTokMoney: '17,500',
+                      name: _controller.text,
                       money: '187.5'),
+                  const Custom(),
                 ],
               ),
               const SizedBox(
@@ -279,6 +285,203 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
             ],
           ),
+        ),
+      ),
+    );
+  }
+}
+
+class Custom extends StatefulWidget {
+  const Custom({
+    super.key,
+  });
+
+  @override
+  State<Custom> createState() => _CustomState();
+}
+
+class _CustomState extends State<Custom> {
+  @override
+  Widget build(BuildContext context) {
+    String _inputValue = '';
+
+    void _handleButtonPress(String value) {
+      setState(() {
+        _inputValue += value;
+      });
+    }
+
+    void _clearInput() {
+      setState(() {
+        _inputValue = '';
+      });
+    }
+
+    Widget _buildButton(String buttonText) {
+      return Expanded(
+        child: TextButton(
+          onPressed: () {
+            if (buttonText == '=') {
+              _clearInput();
+            } else {
+              _handleButtonPress(buttonText);
+            }
+          },
+          child: Text(
+            buttonText,
+            style: TextStyle(fontSize: 24.0),
+          ),
+        ),
+      );
+    }
+
+    var width = MediaQuery.of(context).size.width;
+    var height = MediaQuery.of(context).size.height;
+    return InkWell(
+      onTap: () {
+        print("PResss");
+        showDialog(
+            context: context,
+            builder: (BuildContext context) {
+              return AlertDialog(
+                title: Column(
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        const Text(
+                          'Custom',
+                          style: TextStyle(
+                            fontSize: 30,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        IconButton(
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
+                          icon: const Icon(
+                            Icons.close,
+                            color: Colors.black,
+                            size: 40,
+                          ),
+                        ),
+                      ],
+                    ),
+                    const Divider(
+                        color: Colors.black87,
+                        height: 10.0,
+                        indent: 5.0, // Starting Space
+                        endIndent: 5.0 // Ending Space
+                        )
+                  ],
+                ),
+                content: Container(
+                  height: 500,
+                  width: 500,
+                  child: Column(
+                    children: [
+                      Row(
+                        children: [
+                          Image.asset(
+                            'images/coin.jpeg',
+                            width: 30,
+                            height: 30,
+                          ),
+                          Container(
+                            padding: EdgeInsets.all(16.0),
+                            alignment: Alignment.bottomRight,
+                            child: Text(
+                              _inputValue,
+                              style: TextStyle(fontSize: 32.0),
+                            ),
+                          ),
+                        ],
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          _buildButton('1'),
+                          _buildButton('2'),
+                          _buildButton('3'),
+                          IconButton(
+                            onPressed: _clearInput,
+                            icon: Icon(
+                              Icons.clear_sharp,
+                            ),
+                          )
+                        ],
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          _buildButton('4'),
+                          _buildButton('5'),
+                          _buildButton('6'),
+                          _buildButton('000'),
+                        ],
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          _buildButton('7'),
+                          _buildButton('8'),
+                          _buildButton('9'),
+                          _buildButton('0'),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+              );
+            });
+      },
+      child: Container(
+        height: height,
+        width: width,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(8),
+          border: Border.all(
+            color: Colors.grey,
+          ),
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Image.asset(
+                  "images/coin.jpeg",
+                  width: 35,
+                  height: 35,
+                ),
+                const SizedBox(
+                  width: 10,
+                ),
+                const Text(
+                  "Custom",
+                  overflow: TextOverflow.clip,
+                  style: TextStyle(
+                    fontSize: 35,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            const Text(
+              "Large amount supported ",
+              overflow: TextOverflow.clip,
+              style: TextStyle(
+                fontSize: 16,
+                color: Colors.grey,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ],
         ),
       ),
     );
