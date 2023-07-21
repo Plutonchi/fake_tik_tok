@@ -1,7 +1,9 @@
 import 'package:fake_tik_tok/constans/images.dart';
 import 'package:fake_tik_tok/constans/texts.dart';
+import 'package:fake_tik_tok/widgets/custom_coins.dart';
 import 'package:fake_tik_tok/widgets/money_contain.dart';
 import 'package:flutter/material.dart';
+// ignore: depend_on_referenced_packages
 import 'package:flutter_svg/flutter_svg.dart';
 
 class MyHomePage extends StatefulWidget {
@@ -209,22 +211,14 @@ class _MyHomePageState extends State<MyHomePage> {
                 height: 10,
               ),
               GridView(
-                scrollDirection: Axis.vertical, //default
-                reverse: false, //default
-                controller: ScrollController(),
-                primary: false,
-                shrinkWrap: true, padding: const EdgeInsets.all(5.0),
-
+                shrinkWrap: true,
+                padding: const EdgeInsets.all(5.0),
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  mainAxisExtent: 120,
                   crossAxisCount: 4,
-                  mainAxisSpacing: 25.0,
-                  crossAxisSpacing: 35.0,
+                  mainAxisSpacing: 30.0,
+                  crossAxisSpacing: 15.0,
                 ),
-                semanticChildCount: 0,
-                cacheExtent: 0.0,
-                clipBehavior: Clip.hardEdge,
-                keyboardDismissBehavior:
-                    ScrollViewKeyboardDismissBehavior.manual,
                 children: [
                   MoneyContain(
                       width: width,
@@ -285,203 +279,6 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
             ],
           ),
-        ),
-      ),
-    );
-  }
-}
-
-class Custom extends StatefulWidget {
-  const Custom({
-    super.key,
-  });
-
-  @override
-  State<Custom> createState() => _CustomState();
-}
-
-class _CustomState extends State<Custom> {
-  @override
-  Widget build(BuildContext context) {
-    String _inputValue = '';
-
-    void _handleButtonPress(String value) {
-      setState(() {
-        _inputValue += value;
-      });
-    }
-
-    void _clearInput() {
-      setState(() {
-        _inputValue = '';
-      });
-    }
-
-    Widget _buildButton(String buttonText) {
-      return Expanded(
-        child: TextButton(
-          onPressed: () {
-            if (buttonText == '=') {
-              _clearInput();
-            } else {
-              _handleButtonPress(buttonText);
-            }
-          },
-          child: Text(
-            buttonText,
-            style: TextStyle(fontSize: 24.0),
-          ),
-        ),
-      );
-    }
-
-    var width = MediaQuery.of(context).size.width;
-    var height = MediaQuery.of(context).size.height;
-    return InkWell(
-      onTap: () {
-        print("PResss");
-        showDialog(
-            context: context,
-            builder: (BuildContext context) {
-              return AlertDialog(
-                title: Column(
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        const Text(
-                          'Custom',
-                          style: TextStyle(
-                            fontSize: 30,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        IconButton(
-                          onPressed: () {
-                            Navigator.pop(context);
-                          },
-                          icon: const Icon(
-                            Icons.close,
-                            color: Colors.black,
-                            size: 40,
-                          ),
-                        ),
-                      ],
-                    ),
-                    const Divider(
-                        color: Colors.black87,
-                        height: 10.0,
-                        indent: 5.0, // Starting Space
-                        endIndent: 5.0 // Ending Space
-                        )
-                  ],
-                ),
-                content: Container(
-                  height: 500,
-                  width: 500,
-                  child: Column(
-                    children: [
-                      Row(
-                        children: [
-                          Image.asset(
-                            'images/coin.jpeg',
-                            width: 30,
-                            height: 30,
-                          ),
-                          Container(
-                            padding: EdgeInsets.all(16.0),
-                            alignment: Alignment.bottomRight,
-                            child: Text(
-                              _inputValue,
-                              style: TextStyle(fontSize: 32.0),
-                            ),
-                          ),
-                        ],
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          _buildButton('1'),
-                          _buildButton('2'),
-                          _buildButton('3'),
-                          IconButton(
-                            onPressed: _clearInput,
-                            icon: Icon(
-                              Icons.clear_sharp,
-                            ),
-                          )
-                        ],
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          _buildButton('4'),
-                          _buildButton('5'),
-                          _buildButton('6'),
-                          _buildButton('000'),
-                        ],
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          _buildButton('7'),
-                          _buildButton('8'),
-                          _buildButton('9'),
-                          _buildButton('0'),
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
-              );
-            });
-      },
-      child: Container(
-        height: height,
-        width: width,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(8),
-          border: Border.all(
-            color: Colors.grey,
-          ),
-        ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Image.asset(
-                  "images/coin.jpeg",
-                  width: 35,
-                  height: 35,
-                ),
-                const SizedBox(
-                  width: 10,
-                ),
-                const Text(
-                  "Custom",
-                  overflow: TextOverflow.clip,
-                  style: TextStyle(
-                    fontSize: 35,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ],
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            const Text(
-              "Large amount supported ",
-              overflow: TextOverflow.clip,
-              style: TextStyle(
-                fontSize: 16,
-                color: Colors.grey,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ],
         ),
       ),
     );

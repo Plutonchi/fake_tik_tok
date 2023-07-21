@@ -1,3 +1,5 @@
+// ignore_for_file: depend_on_referenced_packages, use_full_hex_values_for_flutter_colors
+
 import 'package:fake_tik_tok/my_home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -14,6 +16,7 @@ class ProgressInd extends StatefulWidget {
 }
 
 class _ProgressIndState extends State<ProgressInd> {
+  @override
   void initState() {
     super.initState();
     _navigateAfterDelay();
@@ -35,7 +38,7 @@ class _ProgressIndState extends State<ProgressInd> {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      content: Container(
+      content: SizedBox(
         height: 150,
         width: 250,
         child: Column(
@@ -96,7 +99,7 @@ class _DoneProgressState extends State<DoneProgress> {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => MyHomePage(),
+                  builder: (context) => const MyHomePage(),
                 ),
               );
             },
@@ -106,7 +109,7 @@ class _DoneProgressState extends State<DoneProgress> {
           ),
         ],
       ),
-      content: Container(
+      content: SizedBox(
         width: 400,
         height: 300,
         child: Column(

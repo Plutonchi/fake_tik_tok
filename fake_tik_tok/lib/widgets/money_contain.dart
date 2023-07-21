@@ -39,15 +39,9 @@ class _MoneyContainState extends State<MoneyContain> {
                           icon: const Icon(
                             Icons.close,
                             color: Colors.black,
-                            size: 40,
                           ),
                         ),
-                      ],
-                    ),
-                    const Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
+                        const Text(
                           'Order Summary',
                           style: TextStyle(
                             fontSize: 30,
@@ -64,34 +58,12 @@ class _MoneyContainState extends State<MoneyContain> {
                         )
                   ],
                 ),
-                content: Container(
+                content: SizedBox(
                   height: 280,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          const Text(
-                            'Account',
-                            style: TextStyle(
-                              fontSize: 30,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          Text(
-                            '${widget.name}',
-                            style: const TextStyle(
-                              fontSize: 30,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ],
-                      ),
-                      SizedBox(
-                        height: 30,
-                      ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -142,7 +114,7 @@ class _MoneyContainState extends State<MoneyContain> {
                                 width: 40,
                               ),
                               const Text(
-                                '************7892',
+                                '  ************7892',
                                 style: TextStyle(
                                   fontSize: 20,
                                   color: Colors.grey,
@@ -192,12 +164,13 @@ class _MoneyContainState extends State<MoneyContain> {
                             backgroundColor: const Color(0xffff005c),
                           ),
                           onPressed: () {
-                            Navigator.push(
+                            Navigator.pushReplacement(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => ProgressInd(
-                                        tiktokmoney: widget.tikTokMoney,
-                                      )),
+                                builder: (context) => ProgressInd(
+                                  tiktokmoney: widget.tikTokMoney,
+                                ),
+                              ),
                             );
                           },
                           child: const Padding(
@@ -242,7 +215,7 @@ class _MoneyContainState extends State<MoneyContain> {
                   width: 10,
                 ),
                 Text(
-                  "${widget.tikTokMoney}",
+                  widget.tikTokMoney,
                   overflow: TextOverflow.clip,
                   style: const TextStyle(
                     fontSize: 35,
